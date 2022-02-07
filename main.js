@@ -37,34 +37,39 @@ function fillGap(gap) {
             return randFromList(verbsPast, 1)[0];
         case "_vIng":
             return randFromList(verbsIng, 1)[0];
-        case "_adverb":
+        case "_adv":
             return randFromList(adverbs, 1)[0];
-        case "_adjective":
+        case "_adj":
             return randFromList(adjectives, 1)[0];
-        case "_nominalization":
+        case "_nom":
             return randFromList(nominalizations, 1)[0];
+        case "_noms":
+            return randFromList(nominalizationsM, 1)[0];
         case "_noun":
             return randFromList(nouns, 1)[0];
-        case "_location":
+        case "_loc":
             return randFromList(locations, 1)[0];
         default:
             return "___"
-            break;
     }
 }
 
 function fillSentenceFrame(frame) {
-    console.log(frame);
     let pieces = frame.split(" ");
-    console.log(pieces);
+
+    let word;
+    let used = [];
     for (let i = 0; i < pieces.length; i++) {
         if (pieces[i].includes("_")) {
-            pieces[i] = fillGap(pieces[i]);
+            do {
+                word = fillGap(pieces[i], used);
+            } while (used.includes(word.root));
+            pieces[i] = word.word;
+            used.push(word.root);
         }
     }
     pieces[pieces.length - 1] += ".";
     pieces = pieces.join(' ');
-    console.log(pieces);
     return pieces;
 }
 

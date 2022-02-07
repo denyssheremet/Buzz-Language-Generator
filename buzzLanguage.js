@@ -1,17 +1,24 @@
+class Word {
+    constructor(root, word) {
+        this.root = root;
+        this.word = word;
+    }
+}
+
 // -verb -nom -adj -adv
 var buzzwords =
     [
         {
             root: "efficien",
             verb: "",
-            nom: "cy",
+            nom: "cy cies",
             adj: "t",
             adv: "tly",
         },
         {
             root: "disrupt",
             verb: ". ed ing",
-            nom: "ion",
+            nom: "ion ions",
             adj: "ive",
             adv: "ively",
         },
@@ -24,7 +31,7 @@ var buzzwords =
         }, {
             root: "sol",
             verb: "ve ved ving",
-            nom: "ution",
+            nom: "ution utions",
             adj: "ved",
             adv: "",
         }, {
@@ -42,61 +49,61 @@ var buzzwords =
         }, {
             root: "redefin",
             verb: "e ed ing",
-            nom: "ition",
+            nom: "ition itions",
             adj: "ed",
             adv: "",
         }, {
             root: "consider",
             verb: ". ed ing",
-            nom: "ation",
+            nom: "ation ations",
             adj: "ed",
             adv: "",
         }, {
             root: "envision",
             verb: ". ed ing",
-            nom: "ing",
+            nom: "ing ings",
             adj: "ed",
             adv: "",
         }, {
             root: "creat",
             verb: "e ed ing",
-            nom: "ion",
+            nom: "ion ions",
             adj: "ed",
             adv: "",
         }, {
             root: "critical",
             verb: "",
-            nom: "ity",
+            nom: "ity ities",
             adj: "",
             adv: "ly",
         }, {
             root: "data",
             verb: "",
-            nom: ".",
+            nom: ". .",
             adj: "",
             adv: "",
         }, {
             root: "need",
             verb: "",
-            nom: ".",
+            nom: ". s",
             adj: "ed",
             adv: "",
         }, {
             root: "expert",
             verb: "",
-            nom: "ise",
+            nom: "ise ises",
             adj: ".",
             adv: "ly",
         }, {
             root: "communicat",
             verb: "e ed ing",
-            nom: "ion",
+            nom: "ion ions",
             adj: "ed",
             adv: "ingly",
         }, {
                 root:"cultivat",
                 verb:"e ed ing",
-                nom:"ion",
+                nom:"ion ions",
                 adj:"",
                 adv:"",
             },    
@@ -127,6 +134,7 @@ var verbsPast = [];
 var verbsIng = [];
 
 var nominalizations = [];
+var nominalizationsM = [];
 var adjectives = [];
 var adverbs = [];
 
@@ -143,7 +151,7 @@ in all areas of
 
 var sentenceFrames =
     `
-Our mission is to _vPres the _nominalization of _nominalization _location _adjective _nominalization through _adverb _vEd _nominalization
+Our mission is to _vPres the _nom of _nom _loc _adj _nom by _vIng _adv _vEd _noms
 `
 
 for (let i = 0; i < adverbs.length; i++) {
@@ -158,14 +166,21 @@ function stringToList(st) {
     return result;
 }
 
+function listToWords(result) {
+    for (let i = 0; i < result.length; i++) {
+        result[i] = new Word(result[i], result[i]);
+    }
+    return result;
+}
+
+
 // adverbs = stringToList(adverbs);
 // verbs = stringToList(verbs);
 // adjectives = stringToList(adjectives);
 // nouns = stringToList(nouns);
 // nominalizations = stringToList(nominalizations);
 
-locations = stringToList(locations);
-
+locations = listToWords(stringToList(locations));
 sentenceFrames = stringToList(sentenceFrames);
 
 
@@ -181,22 +196,29 @@ for (let i = 0; i < buzzwords.length; i++) {
         for (let j = 0; j < verb.length; j++) {
             verb[j] = verb[j].replace('.', '');
         }
-        verbsPresent.push(word.root + verb[0]);
-        verbsPast.push(word.root + verb[1]);
-        verbsIng.push(word.root + verb[2]);
+        verbsPresent.push(new Word(word.root, word.root + verb[0]));
+        verbsPast.push(new Word(word.root, word.root + verb[1]));
+        verbsIng.push(new Word(word.root, word.root + verb[2]));
     }
 
     // nominalizations
     if (word.nom !== "") {
-        nominalizations.push(word.root + word.nom.replace('.', ''));
+        let nom = word.nom.split(" ");
+        for (let j = 0; j < nom.length; j++) {
+            nom[j] = nom[j].replace('.', '');
+        }
+        nominalizations.push(new Word(word.root, word.root + nom[0]));
+        if (nom.length > 1) {
+            nominalizationsM.push(new Word(word.root, word.root + nom[1]));
+        }
     }
     // adjectives
     if (word.adj !== "") {
-        adjectives.push(word.root + word.adj.replace('.', ''));
+        adjectives.push(new Word(word.root, word.root + word.adj.replace('.', '')));
     }
     // adverbs
     if (word.adv !== "") {
-        adverbs.push(word.root + word.adv.replace('.', ''));
+        adverbs.push(new Word(word.root, word.root + word.adv.replace('.', '')));
     }
 }
 console.log(verbsPresent);
