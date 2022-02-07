@@ -31,8 +31,12 @@ function randFromList(listFrom, amount) {
 
 function fillGap(gap) {
     switch (gap) {
-        case "_verb":
-            return randFromList(verbs, 1)[0];
+        case "_vPres":
+            return randFromList(verbsPresent, 1)[0];
+        case "_vEd":
+            return randFromList(verbsPast, 1)[0];
+        case "_vIng":
+            return randFromList(verbsIng, 1)[0];
         case "_adverb":
             return randFromList(adverbs, 1)[0];
         case "_adjective":
@@ -61,13 +65,14 @@ function fillSentenceFrame(frame) {
     pieces[pieces.length - 1] += ".";
     pieces = pieces.join(' ');
     console.log(pieces);
+    return pieces;
 }
 
 
 
 window.addEventListener("load", function () {
 
-    document.getElementById("output").innerHTML = randFromList(adverbs, 1);
-    fillSentenceFrame(randFromList(sentenceFrames, 1)[0]);
+    document.getElementById("output").innerHTML = fillSentenceFrame(randFromList(sentenceFrames, 1)[0]);
+
 
 });
