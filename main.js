@@ -1,3 +1,5 @@
+var parser = new Parser(pb);
+var par = new Paragraph(this.document, parser);
 
 
 function shuffle(array) {
@@ -32,12 +34,10 @@ function randFromList(listFrom, amount) {
 
 window.addEventListener("load", function () {
 
-    let parser = new Parser(pb);
 
     document.getElementById("output").innerHTML = parser.fillIn(sentenceFrames[sentenceFrames.length - 1]);
 
 
-    var par = new Paragraph(this.document, parser);
     par.add();
     par.add(1, "h4");
     par.add(7);

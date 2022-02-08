@@ -24,7 +24,7 @@ class PhraseBank {
 
     get(name){
         let hasComma = name.includes(",");
-        name = name.replace(",", "")
+        name = name.replaceAll(",", "")
 
 
         if (!(name in this.dict)) {
@@ -50,7 +50,7 @@ class PhraseBank {
 
     randFromList(listFrom) {
         const shuffled = this.shuffle(listFrom);
-        return shuffled[0];
+        return new Word(shuffled[0].root, shuffled[0].word);
     };
 
     shuffle(array) {
@@ -307,7 +307,7 @@ The true source of _nom is _vIng new _noms
 While most are _vIng _loc _nom to _vPres _nom, we believe in _vIng _noms 
 What one has to _vPres is that the frontiers of _nom need to be _adv _adj
 Soon, _adj _noms will be _adj _nom
-Soon, _phrS will become a _phrC
+Soon, _phrS will become _phrC
 The more _nom is _vEd, the more _noms are _vEd
 Every _nom creates new _noms
 Soon, the _phrS will lead to _phrS
