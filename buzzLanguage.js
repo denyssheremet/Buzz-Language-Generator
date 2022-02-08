@@ -64,9 +64,9 @@ var buzzwords =
             adj: ".",
             adv: "",
         }, {
-            root: "data",
+            root: "data-point",
             verb: "",
-            nom: "-point .",
+            nom: ". s",
             adj: "",
             adv: "",
         }, {
@@ -193,6 +193,7 @@ in all areas of
 
 var simpleSentences = 
 `
+our _nom is _vIng
 our _nom is _vIng _noms
 `
 

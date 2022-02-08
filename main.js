@@ -85,9 +85,9 @@ function fillGap(gap) {
             res = "___"
             break;
     }
-    // if (hasComma) {
-    //     res.word += ",";
-    // }
+    if (hasComma) {
+        res.word += ",";
+    }
     return res;
 
 }
