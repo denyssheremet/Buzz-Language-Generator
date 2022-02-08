@@ -5,6 +5,44 @@ class Word {
     }
 }
 
+class PhraseBank {
+    constructor(name) {
+        this.name = name;
+        this.dict = {};
+    }
+
+    add(words, name) {
+        if (!(name in this.dict)) {
+            this.dict[name] = [];
+        }
+        if (typeof words === 'string' ) {
+            words = this.stringToWordList(words)
+        }
+        this.dict[name] = this.dict[name].concat(words);
+    }
+
+
+    stringToList(st) {
+        let result = st.split("\n").slice(1, -1);
+        for (let i = 0; i < result.length; i++) {
+            result[i] = result[i].replace('•', '').trim();
+        }
+        return result;
+    }
+    
+    listToWords(li) {
+        for (let i = 0; i < li.length; i++) {
+            li[i] = new Word(li[i], li[i]);
+        }
+        return li;
+    }
+
+    stringToWordList(st) {
+        return this.listToWords(this.stringToList(st));
+    }
+
+}
+
 // -verb -nom -adj -adv
 var buzzwords =
     [
@@ -111,7 +149,7 @@ var buzzwords =
             nom: "",
             adj: ".",
             adv: "ly",
-        },  {
+        }, {
             root: "expect",
             verb: ". ed ing",
             nom: "ation",
@@ -196,14 +234,14 @@ throughout
 in all areas of
 `
 
-var simpleSentences = 
-`
+var simpleSentences =
+    `
 our _nom is _vIng
 our _nom is _vIng _noms
 `
 
-var simplePassiveSentences = 
-`
+var simplePassiveSentences =
+    `
 _adj _noms are _adv _adj
 _noms are being _vEd
 `
@@ -227,8 +265,8 @@ While _sent, _sentP
 _pre although _sentP, _sent
 `
 
-var simplePhrases = 
-`
+var simplePhrases =
+    `
 _adj _nom
 _nom of _nom
 _noms of _nom
@@ -240,8 +278,8 @@ the future of _nom
 the potential of _nom
 `
 
-var complexPhrases = 
-`
+var complexPhrases =
+    `
 _adj _nom of _nom
 _nom of _adj _nom
 _nom of _vIng _nom
@@ -253,16 +291,16 @@ _adv _adj _nom of _nom
 _adv _adj _nom of _noms
 `
 
-var titlePhrases = 
-`
+var titlePhrases =
+    `
 Re-Imagining Tomorrow through _nom and _nom
 Why _adj _noms are _adv _adj
 _nom is _nom
 Why _adj _noms are _adv _adj
 `
 
-var prefixFrames = 
-`
+var prefixFrames =
+    `
 Because
 And
 So
@@ -274,19 +312,19 @@ You need to understand that
 
 `
 
-var inductionFrames = 
-`
+var inductionFrames =
+    `
 More people have _vEd than I have
 `
 
-var pacingFrames = 
-`
+var pacingFrames =
+    `
 The time for this article has come
 Now more than ever, we need a _adj _nom
 `
 
-var dogSentences = 
-`
+var dogSentences =
+    `
 Dog lover
 Dog fanatic
 Good with dogs
@@ -299,8 +337,8 @@ Caretaker of three wonderful dogs
 My dog can testify to my outstanding character
 `
 
-var goodPersonalAdjectives = 
-`
+var goodPersonalAdjectives =
+    `
 dependable
 determined
 careful
@@ -316,8 +354,8 @@ talented
 multifaceted
 `
 
-var goodPersonalDescriptions = 
-`
+var goodPersonalDescriptions =
+    `
 great comunicator
 true team player
 real winner
@@ -346,6 +384,16 @@ function listToWords(result) {
 }
 
 
+let pb = new PhraseBank("test");
+pb.add(locations, "_loc");
+pb.add(simplePhrases, "_phrS");
+pb.add(complexPhrases, "_phrC");
+pb.add(prefixFrames, "_pre");
+pb.add(simplePassiveSentences, "_sentP");
+pb.add(simpleSentences, "_sent");
+pb.add(sentenceFrames, "_S");
+
+console.log(pb);
 
 locations = listToWords(stringToList(locations));
 
@@ -357,6 +405,8 @@ prefixFrames = listToWords(stringToList(prefixFrames));
 simplePassiveSentences = listToWords(stringToList(simplePassiveSentences));
 simpleSentences = listToWords(stringToList(simpleSentences));
 sentenceFrames = stringToList(sentenceFrames);
+
+
 
 
 for (let i = 0; i < buzzwords.length; i++) {
@@ -372,6 +422,10 @@ for (let i = 0; i < buzzwords.length; i++) {
         verbsPresent.push(new Word(word.root, word.root + verb[0]));
         verbsPast.push(new Word(word.root, word.root + verb[1]));
         verbsIng.push(new Word(word.root, word.root + verb[2]));
+
+        pb.add(new Word(word.root, word.root + verb[0]), "_vPres");
+        pb.add(new Word(word.root, word.root + verb[1]), "_vEd");
+        pb.add(new Word(word.root, word.root + verb[2]), "_vIng");
     }
 
     // nominalizations
@@ -381,16 +435,20 @@ for (let i = 0; i < buzzwords.length; i++) {
             nom[j] = nom[j].replace('.', '');
         }
         nominalizations.push(new Word(word.root, word.root + nom[0]));
+        pb.add(new Word(word.root, word.root + nom[0]), "_noms");
         if (nom.length > 1) {
             nominalizationsM.push(new Word(word.root, word.root + nom[1]));
+            pb.add(new Word(word.root, word.root + nom[1]), "_noms");
         }
     }
     // adjectives
     if (word.adj !== "") {
         adjectives.push(new Word(word.root, word.root + word.adj.replace('.', '')));
+        pb.add(new Word(word.root, word.root + word.adj.replace('.', '')), "_adj");
     }
     // adverbs
     if (word.adv !== "") {
         adverbs.push(new Word(word.root, word.root + word.adv.replace('.', '')));
+        pb.add(new Word(word.root, word.root + word.adv.replace('.', '')), "_adv");
     }
 }

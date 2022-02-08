@@ -32,10 +32,8 @@ function randFromList(listFrom, amount) {
 
 window.addEventListener("load", function () {
 
-    // document.getElementById("output").innerHTML = fillSentenceFrame(randFromList(sentenceFrames, 1)[0]);
     let parser = new Parser("");
     document.getElementById("output").innerHTML = parser.fillIn(sentenceFrames[sentenceFrames.length - 1]);
-    // document.getElementById("output").innerHTML = fillSentenceFrame(sentenceFrames[1]);
 
     let pars = 4;
     let parLen = 3;
