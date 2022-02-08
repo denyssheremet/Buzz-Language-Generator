@@ -30,31 +30,59 @@ function randFromList(listFrom, amount) {
 
 
 function fillGap(gap) {
+    res = "";
+    let hasComma = gap.includes(",");
+    gap = gap.replace(",", "")
+
     switch (gap) {
         case "_vPres":
-            return randFromList(verbsPresent, 1)[0];
+            res = randFromList(verbsPresent, 1)[0];
+            break;
         case "_vEd":
-            return randFromList(verbsPast, 1)[0];
+            res = randFromList(verbsPast, 1)[0];
+            break;
         case "_vIng":
-            return randFromList(verbsIng, 1)[0];
+            res = randFromList(verbsIng, 1)[0];
+            break;
         case "_adv":
-            return randFromList(adverbs, 1)[0];
+            res = randFromList(adverbs, 1)[0];
+            break;
         case "_adj":
-            return randFromList(adjectives, 1)[0];
+            res = randFromList(adjectives, 1)[0];
+            break;
         case "_nom":
-            return randFromList(nominalizations, 1)[0];
+            res = randFromList(nominalizations, 1)[0];
+            break;
         case "_noms":
-            return randFromList(nominalizationsM, 1)[0];
+            res = randFromList(nominalizationsM, 1)[0];
+            break;
         case "_noun":
-            return randFromList(nouns, 1)[0];
+            res = randFromList(nouns, 1)[0];
+            break;
         case "_loc":
-            return randFromList(locations, 1)[0];
+            res = randFromList(locations, 1)[0];
+            break;
+        case "_phrS":
+            res = fillSentenceFrame(randFromList(simplePhrases, 1)[0].word, false);
+            res = new Word(res, res);
+            break;
+        case "_phrC":
+            res = fillSentenceFrame(randFromList(complexPhrases, 1)[0].word, false);
+            res = new Word(res, res);
+            break;
         default:
-            return "___"
+            res = "___"
+            break;
     }
+    // if (hasComma) {
+    //     res.word += ",";
+    // }
+    return res;
+
 }
 
-function fillSentenceFrame(frame) {
+function fillSentenceFrame(frame, addDot = true) {
+    console.log(frame);
     let pieces = frame.split(" ");
 
     let word;
@@ -62,13 +90,13 @@ function fillSentenceFrame(frame) {
     for (let i = 0; i < pieces.length; i++) {
         if (pieces[i].includes("_")) {
             do {
-                word = fillGap(pieces[i], used);
+                word = fillGap(pieces[i]);
             } while (used.includes(word.root));
             pieces[i] = word.word;
             used.push(word.root);
         }
     }
-    pieces[pieces.length - 1] += ".";
+    if (addDot) { pieces[pieces.length - 1] += "."; }
     pieces = pieces.join(' ');
     return pieces;
 }
@@ -77,7 +105,25 @@ function fillSentenceFrame(frame) {
 
 window.addEventListener("load", function () {
 
-    document.getElementById("output").innerHTML = fillSentenceFrame(randFromList(sentenceFrames, 1)[0]);
+    // document.getElementById("output").innerHTML = fillSentenceFrame(randFromList(sentenceFrames, 1)[0]);
+    document.getElementById("output").innerHTML = fillSentenceFrame(sentenceFrames[sentenceFrames.length - 1]);
+    // document.getElementById("output").innerHTML = fillSentenceFrame(sentenceFrames[1]);
 
+    let pars = 4;
+    let parLen = 3;
+
+    for (let p = 0; p < pars; p++) {
+        let sentence = [];
+        let paragraph = this.document.createElement("p");
+
+        for (let s = 0; s < parLen; s++) {
+            sentence.push(fillSentenceFrame(randFromList(sentenceFrames, 1)[0]))
+        }
+
+        sentence = sentence.join(' ');
+        paragraph.innerHTML = sentence;
+        document.getElementById("textZone").appendChild(paragraph);
+
+    }
 
 });

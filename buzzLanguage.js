@@ -21,19 +21,6 @@ var buzzwords =
             nom: "ion ions",
             adj: "ive",
             adv: "ively",
-        },
-        {
-            root: "importan",
-            verb: "",
-            nom: "ce",
-            adj: "t",
-            adv: "tly",
-        }, {
-            root: "sol",
-            verb: "ve ved ving",
-            nom: "ution utions",
-            adj: "ved",
-            adv: "",
         }, {
             root: "grow",
             verb: ". n ing",
@@ -55,13 +42,13 @@ var buzzwords =
         }, {
             root: "consider",
             verb: ". ed ing",
-            nom: "ation ations",
-            adj: "ed",
+            nom: "",
+            adj: "",
             adv: "",
         }, {
             root: "envision",
             verb: ". ed ing",
-            nom: "ing ings",
+            nom: "",
             adj: "ed",
             adv: "",
         }, {
@@ -73,9 +60,9 @@ var buzzwords =
         }, {
             root: "critical",
             verb: "",
-            nom: "ity ities",
-            adj: "",
-            adv: "ly",
+            nom: "",
+            adj: ".",
+            adv: "",
         }, {
             root: "data",
             verb: "",
@@ -92,40 +79,95 @@ var buzzwords =
             root: "expert",
             verb: "",
             nom: "ise ises",
-            adj: ".",
+            adj: "",
             adv: "ly",
         }, {
             root: "communicat",
             verb: "e ed ing",
             nom: "ion ions",
             adj: "ed",
-            adv: "ingly",
+            adv: "",
         }, {
-                root:"cultivat",
-                verb:"e ed ing",
-                nom:"ion ions",
-                adj:"",
-                adv:"",
-            },    
-            // {
-        //         root:"",
-        //         verb:". ed ing",
-        //         nom:"ion",
-        //         adj:"t",
-        //         adv:"tly",
-        //     },    {
-        //         root:"",
-        //         verb:". ed ing",
-        //         nom:"ion",
-        //         adj:"t",
-        //         adv:"tly",
-        //     },    {
-        //         root:"",
-        //         verb:". ed ing",
-        //         nom:"ion",
-        //         adj:"t",
-        //         adv:"tly",
-        //     },
+            root: "wealth",
+            verb: "",
+            nom: ".",
+            adj: "",
+            adv: "",
+        }, {
+            root: "personal",
+            verb: "",
+            nom: "ity",
+            adj: ".",
+            adv: "ly",
+        }, {
+            root: "learn",
+            verb: ". ed ing",
+            nom: "ing",
+            adj: "ed",
+            adv: "",
+        }, {
+            root: "large",
+            verb: "",
+            nom: "",
+            adj: ".",
+            adv: "ly",
+        },  {
+            root: "expect",
+            verb: ". ed ing",
+            nom: "ation",
+            adj: "ed",
+            adv: "",
+        }, {
+            root: "imagin",
+            verb: "e ed ing",
+            nom: "ation",
+            adj: "ed",
+            adv: "",
+        }, {
+            root: "complet",
+            verb: "",
+            nom: "ion",
+            adj: "e",
+            adv: "ely",
+        }, {
+            root: "stead",
+            verb: "",
+            nom: "",
+            adj: "y",
+            adv: "ily",
+        }, {
+            root: "inform",
+            verb: ". ed ing",
+            nom: "ation",
+            adj: "",
+            adv: "",
+        }, {
+            root: "ethic",
+            verb: "",
+            nom: "s s",
+            adj: "al",
+            adv: "ally",
+        },
+        {
+            root: "tru",
+            verb: "",
+            nom: "th ths",
+            adj: "e",
+            adv: "",
+        }, {
+            root: "realiz",
+            verb: "e ed ing",
+            nom: "ation ations",
+            adj: "ed",
+            adv: "",
+        }, {
+            root: "clear",
+            verb: "",
+            nom: "",
+            adj: ".",
+            adv: "ly",
+        },
+        
     ]
 
 
@@ -151,12 +193,120 @@ in all areas of
 
 var sentenceFrames =
     `
-Our mission is to _vPres the _nom of _nom _loc _adj _nom by _vIng _adv _vEd _noms
+It is our mission to _vPres the _nom of _nom _loc _adj _nom by _vIng _adv _vEd _noms
+It can be said that _adj _noms are the cause of _nom throughout the _adj _nom industry
+We believe that without _adj _noms from _noms, _vIng _noms would not be possible
+It should be clear to anyone that _vIng _nom is _adv _vEd
+The true source of _nom is _vIng new _noms
+While most are _vIng _loc _nom to _vPres _nom, we believe in _vIng _noms 
+What one has to _vPres is that the frontiers of _nom need to be _adv _adj
+Why _adj _noms are _adv _adj
+_adj _noms are _adv _adj
+Soon, _adj _noms will be _adj _nom
+Soon, _phrS will become a _phrC
+The more _nom is _vEd, the more _noms are _vEd
+Every _nom creates new _noms
+Soon, the _phrS will lead to _phrS
 `
 
-for (let i = 0; i < adverbs.length; i++) {
+var simplePhrases = 
+`
+_adj _nom
+_nom of _nom
+_noms of _nom
+_adj _nom
+_nom of _noms
+_nom
+`
 
-}
+var complexPhrases = 
+`
+_adj _nom of _nom
+_nom of _adj _nom
+_nom of _vIng _nom
+_nom _loc _nom
+_adj _nom _loc _nom
+_adj _nom _loc _noms
+_adj _noms _loc _noms
+_adv _adj _nom of _nom
+_adv _adj _nom of _noms
+`
+
+var titlePhrases = 
+`
+Re-Imagining Tomorrow through _nom and _nom
+Why _adj _noms are _adv _adj
+_nom is _nom
+`
+
+var prefixFrames = 
+`
+Because
+And
+So
+Meanwhile, 
+Now more than ever,
+Only a _ago, nobody could have predicted that
+It is hard to believe that
+You need to understand that
+
+`
+
+var inductionFrames = 
+`
+More people have _vEd than I have
+`
+
+var pacingFrames = 
+`
+The time for this article has come
+Now more than ever, we need a _adj _nom
+`
+
+var dogSentences = 
+`
+Dog lover
+Dog fanatic
+Good with dogs
+Very good with dogs
+Dog person
+Handy with dogs
+Dogs love me
+9/10 dogs would recommend me
+Caretaker of three wonderful dogs
+My dog can testify to my outstanding character
+`
+
+var goodAdjectives = 
+`
+dependable
+determined
+careful
+creative
+daring
+alert
+sensitive
+earnest
+sincere
+motivated
+inspired
+talented
+multifaceted
+`
+
+var goodDescriptions = 
+`
+great comunicator
+true team player
+real winner
+profound thinker
+inspiring presence
+disruptive thinker
+invaluable addition to any team
+world-class coordinator
+pioneer
+`
+
 
 function stringToList(st) {
     let result = st.split("\n").slice(1, -1);
@@ -174,17 +324,16 @@ function listToWords(result) {
 }
 
 
-// adverbs = stringToList(adverbs);
-// verbs = stringToList(verbs);
-// adjectives = stringToList(adjectives);
-// nouns = stringToList(nouns);
-// nominalizations = stringToList(nominalizations);
 
 locations = listToWords(stringToList(locations));
+
+simplePhrases = listToWords(stringToList(simplePhrases));
+complexPhrases = listToWords(stringToList(complexPhrases));
+
+
 sentenceFrames = stringToList(sentenceFrames);
 
 
-console.log(buzzwords);
 for (let i = 0; i < buzzwords.length; i++) {
     let word = buzzwords[i];
     console.log(word.root);
@@ -192,7 +341,7 @@ for (let i = 0; i < buzzwords.length; i++) {
     // verbs
     if (word.verb !== "") {
         let verb = word.verb.split(" ");
-        console.log(verb);
+
         for (let j = 0; j < verb.length; j++) {
             verb[j] = verb[j].replace('.', '');
         }
@@ -221,6 +370,3 @@ for (let i = 0; i < buzzwords.length; i++) {
         adverbs.push(new Word(word.root, word.root + word.adv.replace('.', '')));
     }
 }
-console.log(verbsPresent);
-console.log(verbsPast);
-console.log(verbsIng);
