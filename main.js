@@ -33,25 +33,24 @@ function randFromList(listFrom, amount) {
 window.addEventListener("load", function () {
 
     let parser = new Parser(pb);
-    console.log("pb:");
-    console.log(pb);
+    
     document.getElementById("output").innerHTML = parser.fillIn(sentenceFrames[sentenceFrames.length - 1]);
 
     let pars = 4;
     let parLen = 3;
 
-    // for (let p = 0; p < pars; p++) {
-    //     let sentence = [];
-    //     let paragraph = this.document.createElement("p");
+    for (let p = 0; p < pars; p++) {
+        let sentence = [];
+        let paragraph = this.document.createElement("p");
 
-    //     for (let s = 0; s < parLen; s++) {
-    //         sentence.push(parser.fillIn(randFromList(sentenceFrames, 1)[0]))
-    //     }
+        for (let s = 0; s < parLen; s++) {
+            sentence.push(parser.fillIn(randFromList(sentenceFrames, 1)[0]))
+        }
 
-    //     sentence = sentence.join(' ');
-    //     paragraph.innerHTML = sentence;
-    //     document.getElementById("textZone").appendChild(paragraph);
+        sentence = sentence.join(' ');
+        paragraph.innerHTML = sentence;
+        document.getElementById("textZone").appendChild(paragraph);
 
-    // }
+    }
 
 });

@@ -23,16 +23,18 @@ class PhraseBank {
     }
 
     get(name){
+        let hasComma = name.includes(",");
+        name = name.replace(",", "")
+
+
         if (!(name in this.dict)) {
-            return new Word("___","___");
+            return new Word("...","...");
         }
         let x =  this.randFromList(this.dict[name]);
-        if (x.word.includes("_")) {
-            // let w =  new Word(x.root, this.fillIn(x.word));
-            // console.log("w: ->" + w);
-            // return w;
+
+        if (hasComma) {
+            x.word += ",";
         }
-        console.log(x);
         return x;
     }
 
@@ -311,7 +313,7 @@ Soon, the _phrS will lead to _phrS
 _pre every _nom creates new _noms
 While _sent, _sentP
 _pre although _sentP, _sent
-_adj _adj of --- _phrS
+_S
 `
 
 var simplePhrases =

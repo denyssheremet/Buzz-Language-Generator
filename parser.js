@@ -7,8 +7,7 @@ class Parser {
 
     fillGap(gap) {
         let res = "";
-        let hasComma = gap.includes(",");
-        gap = gap.replace(",", "")
+        
 
         let x = this.pb.get(gap);
 
@@ -63,15 +62,12 @@ class Parser {
                 res = "___"
                 break;
         }
-        if (hasComma) {
-            res.word += ",";
-        }
 
         // return res;
         return x
     }
 
-    fillSentenceFrame(frame, addDot = true) {
+    fillSentenceFrame(frame) {
         let pieces = frame.split(" ");
         // pieces.unshift("_pre");
 
@@ -79,25 +75,25 @@ class Parser {
         let used = [];
         for (let i = 0; i < pieces.length; i++) {
             if (pieces[i].includes("_")) {
-                let ind = 0
                 do {
-                    ind++
-                    console.log(ind)
                     word = this.fillGap(pieces[i]);
                 } while (used.includes(word.root));
                 pieces[i] = word.word;
                 used.push(word.root);
-                console.log("used -> ")
-                console.log(used)
             }
         }
-        if (addDot) { pieces[pieces.length - 1] += "."; }
         pieces = pieces.join(' ');
         return pieces;
     }
 
     fillIn(sentence) {
-        return this.fillSentenceFrame(sentence);
+        do {
+            sentence = this.fillSentenceFrame(sentence);
+        } while (sentence.includes("_"))
+
+        sentence += ".";
+
+        return sentence;
     }
 
 }
