@@ -1,15 +1,17 @@
 
 
 class Parser {
-    constructor(dict) {
-        this.dict = dict;
+    constructor(pb) {
+        this.pb = pb;
     }
 
     fillGap(gap) {
         let res = "";
         let hasComma = gap.includes(",");
         gap = gap.replace(",", "")
-    
+
+        let x = this.pb.get(gap);
+
         switch (gap) {
             case "_vPres":
                 res = randFromList(verbsPresent, 1)[0];
@@ -64,23 +66,29 @@ class Parser {
         if (hasComma) {
             res.word += ",";
         }
-        return res;
-    
+
+        // return res;
+        return x
     }
-    
+
     fillSentenceFrame(frame, addDot = true) {
         let pieces = frame.split(" ");
         // pieces.unshift("_pre");
-    
+
         let word;
         let used = [];
         for (let i = 0; i < pieces.length; i++) {
             if (pieces[i].includes("_")) {
+                let ind = 0
                 do {
+                    ind++
+                    console.log(ind)
                     word = this.fillGap(pieces[i]);
                 } while (used.includes(word.root));
                 pieces[i] = word.word;
                 used.push(word.root);
+                console.log("used -> ")
+                console.log(used)
             }
         }
         if (addDot) { pieces[pieces.length - 1] += "."; }
@@ -91,5 +99,5 @@ class Parser {
     fillIn(sentence) {
         return this.fillSentenceFrame(sentence);
     }
-    
+
 }

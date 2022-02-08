@@ -3,6 +3,17 @@ class Word {
         this.root = root;
         this.word = word;
     }
+    toString() {
+        return "<Word[" + this.root + ", " + this.word + "]>";
+    }
+
+    getRoot() {
+        return this.root;
+    }
+
+    getWord() {
+        return this.word;
+    }
 }
 
 class PhraseBank {
@@ -11,16 +22,53 @@ class PhraseBank {
         this.dict = {};
     }
 
+    get(name){
+        if (!(name in this.dict)) {
+            return new Word("___","___");
+        }
+        let x =  this.randFromList(this.dict[name]);
+        if (x.word.includes("_")) {
+            // let w =  new Word(x.root, this.fillIn(x.word));
+            // console.log("w: ->" + w);
+            // return w;
+        }
+        console.log(x);
+        return x;
+    }
+
     add(words, name) {
         if (!(name in this.dict)) {
             this.dict[name] = [];
         }
-        if (typeof words === 'string' ) {
+        if (typeof words === 'string') {
             words = this.stringToWordList(words)
         }
         this.dict[name] = this.dict[name].concat(words);
     }
 
+    randFromList(listFrom) {
+        const shuffled = this.shuffle(listFrom);
+        return shuffled[0];
+    };
+
+    shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+    
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+    
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+    
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+    
+        return array;
+    }
+    
 
     stringToList(st) {
         let result = st.split("\n").slice(1, -1);
@@ -29,7 +77,7 @@ class PhraseBank {
         }
         return result;
     }
-    
+
     listToWords(li) {
         for (let i = 0; i < li.length; i++) {
             li[i] = new Word(li[i], li[i]);
@@ -251,7 +299,7 @@ var sentenceFrames =
 It is our mission to _vPres the _nom of _nom _loc _adj _nom by _vIng _adv _vEd _noms
 It can be said that _adj _noms are the cause of _nom throughout the _adj _nom industry
 We believe that without _adj _noms from _noms, _vIng _noms would not be possible
-It should be clear to anyone that _vIng _nom is _adv _vEd
+It should be clear that _vIng _nom is _adv _vEd
 The true source of _nom is _vIng new _noms
 While most are _vIng _loc _nom to _vPres _nom, we believe in _vIng _noms 
 What one has to _vPres is that the frontiers of _nom need to be _adv _adj
@@ -263,6 +311,7 @@ Soon, the _phrS will lead to _phrS
 _pre every _nom creates new _noms
 While _sent, _sentP
 _pre although _sentP, _sent
+_adj _adj of --- _phrS
 `
 
 var simplePhrases =
@@ -395,6 +444,7 @@ pb.add(sentenceFrames, "_S");
 
 console.log(pb);
 
+
 locations = listToWords(stringToList(locations));
 
 simplePhrases = listToWords(stringToList(simplePhrases));
@@ -435,7 +485,7 @@ for (let i = 0; i < buzzwords.length; i++) {
             nom[j] = nom[j].replace('.', '');
         }
         nominalizations.push(new Word(word.root, word.root + nom[0]));
-        pb.add(new Word(word.root, word.root + nom[0]), "_noms");
+        pb.add(new Word(word.root, word.root + nom[0]), "_nom");
         if (nom.length > 1) {
             nominalizationsM.push(new Word(word.root, word.root + nom[1]));
             pb.add(new Word(word.root, word.root + nom[1]), "_noms");
