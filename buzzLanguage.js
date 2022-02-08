@@ -191,6 +191,17 @@ throughout
 in all areas of
 `
 
+var simpleSentences = 
+`
+our _nom is _vIng _noms
+`
+
+var simplePassiveSentences = 
+`
+_adj _noms are _adv _adj
+_noms are being _vEd
+`
+
 var sentenceFrames =
     `
 It is our mission to _vPres the _nom of _nom _loc _adj _nom by _vIng _adv _vEd _noms
@@ -200,13 +211,13 @@ It should be clear to anyone that _vIng _nom is _adv _vEd
 The true source of _nom is _vIng new _noms
 While most are _vIng _loc _nom to _vPres _nom, we believe in _vIng _noms 
 What one has to _vPres is that the frontiers of _nom need to be _adv _adj
-_adj _noms are _adv _adj
 Soon, _adj _noms will be _adj _nom
 Soon, _phrS will become a _phrC
 The more _nom is _vEd, the more _noms are _vEd
 Every _nom creates new _noms
 Soon, the _phrS will lead to _phrS
 _pre every _nom creates new _noms
+While _sent, _sentP
 `
 
 var simplePhrases = 
@@ -333,6 +344,8 @@ complexPhrases = listToWords(stringToList(complexPhrases));
 
 prefixFrames = listToWords(stringToList(prefixFrames));
 
+simplePassiveSentences = listToWords(stringToList(simplePassiveSentences));
+simpleSentences = listToWords(stringToList(simpleSentences));
 sentenceFrames = stringToList(sentenceFrames);
 
 

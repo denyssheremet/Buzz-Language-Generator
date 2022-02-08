@@ -70,6 +70,14 @@ function fillGap(gap) {
             res = fillSentenceFrame(randFromList(complexPhrases, 1)[0].word, false);
             res = new Word(res, res);
             break;
+        case "_sentP":
+            res = fillSentenceFrame(randFromList(simplePassiveSentences, 1)[0].word, false);
+            res = new Word(res, res);
+            break;
+        case "_sent":
+            res = fillSentenceFrame(randFromList(simpleSentences, 1)[0].word, false);
+            res = new Word(res, res);
+            break;
         case "_pre":
             res = randFromList(prefixFrames, 1)[0];
             break;
