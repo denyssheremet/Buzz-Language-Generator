@@ -282,6 +282,7 @@ at the frontiers of
 in key areas of
 throughout
 in all areas of
+at the cutting edge of
 `
 
 var simpleSentences =
