@@ -70,6 +70,9 @@ function fillGap(gap) {
             res = fillSentenceFrame(randFromList(complexPhrases, 1)[0].word, false);
             res = new Word(res, res);
             break;
+        case "_pre":
+            res = randFromList(prefixFrames, 1)[0];
+            break;
         default:
             res = "___"
             break;
@@ -82,8 +85,8 @@ function fillGap(gap) {
 }
 
 function fillSentenceFrame(frame, addDot = true) {
-    console.log(frame);
     let pieces = frame.split(" ");
+    // pieces.unshift("_pre");
 
     let word;
     let used = [];

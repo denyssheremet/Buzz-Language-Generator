@@ -66,7 +66,7 @@ var buzzwords =
         }, {
             root: "data",
             verb: "",
-            nom: ". .",
+            nom: "-point .",
             adj: "",
             adv: "",
         }, {
@@ -200,13 +200,13 @@ It should be clear to anyone that _vIng _nom is _adv _vEd
 The true source of _nom is _vIng new _noms
 While most are _vIng _loc _nom to _vPres _nom, we believe in _vIng _noms 
 What one has to _vPres is that the frontiers of _nom need to be _adv _adj
-Why _adj _noms are _adv _adj
 _adj _noms are _adv _adj
 Soon, _adj _noms will be _adj _nom
 Soon, _phrS will become a _phrC
 The more _nom is _vEd, the more _noms are _vEd
 Every _nom creates new _noms
 Soon, the _phrS will lead to _phrS
+_pre every _nom creates new _noms
 `
 
 var simplePhrases = 
@@ -237,6 +237,7 @@ var titlePhrases =
 Re-Imagining Tomorrow through _nom and _nom
 Why _adj _noms are _adv _adj
 _nom is _nom
+Why _adj _noms are _adv _adj
 `
 
 var prefixFrames = 
@@ -246,7 +247,7 @@ And
 So
 Meanwhile, 
 Now more than ever,
-Only a _ago, nobody could have predicted that
+Only a while ago, nobody could have predicted that
 It is hard to believe that
 You need to understand that
 
@@ -330,6 +331,7 @@ locations = listToWords(stringToList(locations));
 simplePhrases = listToWords(stringToList(simplePhrases));
 complexPhrases = listToWords(stringToList(complexPhrases));
 
+prefixFrames = listToWords(stringToList(prefixFrames));
 
 sentenceFrames = stringToList(sentenceFrames);
 
