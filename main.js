@@ -34,10 +34,7 @@ function randFromList(listFrom, amount) {
 
 window.addEventListener("load", function () {
 
-
-    document.getElementById("output").innerHTML = parser.fillIn(sentenceFrames[sentenceFrames.length - 1]);
-
-
+    par.add(1, "h2");
     par.add();
     par.add(1, "h4");
     par.add(7);
