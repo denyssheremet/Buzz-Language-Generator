@@ -166,8 +166,13 @@ var buzzwords =
             nom: "",
             adj: ".",
             adv: "ly",
+        }, {
+            root: "bright",
+            verb: "",
+            nom: "",
+            adj: ".",
+            adv: "",
         },
-        
     ]
 
 
@@ -219,6 +224,7 @@ Every _nom creates new _noms
 Soon, the _phrS will lead to _phrS
 _pre every _nom creates new _noms
 While _sent, _sentP
+_pre although _sentP, _sent
 `
 
 var simplePhrases = 
@@ -229,6 +235,9 @@ _noms of _nom
 _adj _nom
 _nom of _noms
 _nom
+the new wave of _nom
+the future of _nom
+the potential of _nom
 `
 
 var complexPhrases = 
@@ -290,7 +299,7 @@ Caretaker of three wonderful dogs
 My dog can testify to my outstanding character
 `
 
-var goodAdjectives = 
+var goodPersonalAdjectives = 
 `
 dependable
 determined
@@ -307,7 +316,7 @@ talented
 multifaceted
 `
 
-var goodDescriptions = 
+var goodPersonalDescriptions = 
 `
 great comunicator
 true team player
@@ -352,7 +361,6 @@ sentenceFrames = stringToList(sentenceFrames);
 
 for (let i = 0; i < buzzwords.length; i++) {
     let word = buzzwords[i];
-    console.log(word.root);
 
     // verbs
     if (word.verb !== "") {
